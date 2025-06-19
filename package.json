@@ -1,0 +1,15 @@
+{
+  "name": "yandex-school--interfaces",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node .\\test\\run.test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "module"
+}
