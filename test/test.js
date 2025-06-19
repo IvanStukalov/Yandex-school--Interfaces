@@ -84,7 +84,7 @@ export class Test {
         }
     }
 
-    static runSuite(name) {
+    static async runSuite(name) {
         const suite = this.#suites.find((suite) => suite.name === name);
         if (!suite) {
             this.#printFailure("There is no such test suite");
@@ -94,18 +94,18 @@ export class Test {
         this.#printRunSuite(name);
         for (const testcase of suite.cases) {
             this.#printRunTest(testcase.name);
-            testcase.test();
+            await testcase.test();
         }
     }
 
-    static runAllSuites() {
+    static async runAllSuites() {
         if (!this.#suites.length) {
             this.#printFailure("There are no suites");
             return;
         }
 
         for (const suite of this.#suites) {
-            this.runSuite(suite.name);
+            await this.runSuite(suite.name);
         }
     }
 }

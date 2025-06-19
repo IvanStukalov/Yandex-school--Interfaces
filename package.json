@@ -11,5 +11,8 @@
   },
   "author": "",
   "license": "ISC",
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "jsdom": "^26.1.0"
+  }
 }
