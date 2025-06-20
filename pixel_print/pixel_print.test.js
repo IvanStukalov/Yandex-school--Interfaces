@@ -1,6 +1,6 @@
 import { Test } from "../test/test.js";
-import { toBinaryObject, toBinaryContent } from "./pixel_print.js";
-import { content } from "./pixel_print.data.js";
+import { toBinaryObject, toBinaryContent, toBitmap, checkSum } from "./pixel_print.js";
+import { content, PIXEL_PER_LINE } from "./pixel_print.data.js";
 
 Test.suite("Pixel print", [
   {
@@ -43,6 +43,31 @@ Test.suite("Pixel print", [
       Test.equal(lengthParams.date, binaryContent.date.length / 8);
     },
   },
+  {
+    name: "Bitmap size",
+    test: () => {
+      const bitmap = toBitmap(content);
+
+      Test.equal(PIXEL_PER_LINE, bitmap.length);
+      console.log(bitmap.length)
+      for (const row of bitmap) {
+        Test.equal(PIXEL_PER_LINE, row.length);
+      }
+    }
+  },
+  {
+    name: "Checksum",
+    test: () => {
+      // ??? Чексумма в пдф-ке странная
+      // Во-первых, эта чексумма - literally инвертированая последняя строка
+      // Во-вторых, чексумма в задании неверная, 
+      //  она почему то взята с предпоследней строки а не последней
+      const ans = [1,1,0,1,0,0,0,1,1,1,0,0,1,1,1,1,1,1,0,0,1,1,0,1,1,1,0,1,0,0,0,1];
+      const checksum = checkSum(content);
+
+      Test.equal(ans, checksum);
+    }
+  }
 ]);
 
 Test.runSuite("Pixel print");
